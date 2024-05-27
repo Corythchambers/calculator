@@ -32,21 +32,31 @@ const operate = function(n1, n2, op) {
             return "Error";
     }
 }
+
+const evaluateInput = function () {
+    let valList = display.innerText.split(' ')
+    if (valList.length !== 3) {
+        console.log(valList.length);
+        return;
+    }
+    number1 = parseInt(valList[0]);
+    operand = valList[1];
+    number2 = parseInt(valList[2]);
+    display.innerText = operate(number1, number2, operand);
+}
+
 const display = document.querySelector('#display');
 const clearButton = document.querySelector('#clear');
 const opButtons = document.querySelectorAll('.operator');
 const equalsButton = document.querySelector('#equals');
 
 equalsButton.addEventListener('click', () => {
-    let valList = display.innerText.split(' ')
-    number1 = parseInt(valList[0]);
-    operand = valList[1];
-    number2 = parseInt(valList[2]);
-    display.innerText = operate(number1, number2, operand);
+    evaluateInput();
 })
 
 for (let opButton of opButtons ) {
     opButton.addEventListener('click', () => {
+        evaluateInput();
         display.innerHTML = display.innerHTML + " " + opButton.textContent + " ";
     });
 }
